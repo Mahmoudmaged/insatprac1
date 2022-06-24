@@ -24,7 +24,7 @@ app.use('/api/v1/user', indexRouter.userRouter)
 app.use('/api/v1/post', indexRouter.postRouter)
 app.use('/api/v1/admin', indexRouter.adminRouter)
 const QRCode = require('qrcode')
-app.get("/", (req, res) => {
+app.get("/qr", (req, res) => {
     QRCode.toDataURL(`<a href='https://stackoverflow.com/questions/16531895/mongoose-query-where-value-is-not-null'> click me</a>`, function (err, url) {
         if (err) {
             res.status(400).json({ message: "QR err" })
@@ -33,6 +33,12 @@ app.get("/", (req, res) => {
             res.json({ message: "QR", url })
         }
     })
+})
+
+app.get("/", (req, res) => {
+
+    res.json({ message: "Welcome page" })
+
 })
 connectDB()
 app.listen(port, () => {
