@@ -20,7 +20,7 @@ app.use(express.json())
 const path = require('path')
 app.get("/", (req, res) => {
     try {
-        res.json({ message: "Welcome par" , PO: process.env.PORT})
+        res.json({ message: "Welcome par" , PO:port})
 
     } catch (error) {
         res.json({ message: "error grt page" })
