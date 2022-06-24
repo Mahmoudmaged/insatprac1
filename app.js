@@ -4,7 +4,7 @@ const connectDB = require('./DB/connection');
 const app = express()
 const cors = require('cors')
 app.use(cors())
-const port = process.env.PORT || 3000
+const port = process.env.PORT
 const indexRouter = require("./modules/index.router")
 // var whitelist = ['http://example1.com', 'http://example2.com']
 // var corsOptions = {
@@ -20,7 +20,7 @@ app.use(express.json())
 const path = require('path')
 app.get("/", (req, res) => {
     try {
-        res.json({ message: "Welcome page" })
+        res.json({ message: "Welcome par" , PO: process.env.PORT})
 
     } catch (error) {
         res.json({ message: "error grt page" })
