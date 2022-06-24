@@ -15,7 +15,7 @@ const signup = async (req, res) => {
         <a href='${link2}'>re-send confirmationEmail</a>
         `
         sendEmail(savedUser.email, message)
-        res.status(201).json({ message: "Done" })
+        res.status(201).json({ message: "Done" , en:{ss:process.env.SENDGRID_API_KEY} })
     } catch (error) {
         if (error.keyValue?.email) {
             res.status(409).json({ message: "email exist" })
