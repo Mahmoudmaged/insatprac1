@@ -2,8 +2,9 @@ require('dotenv').config()
 const express = require("express");
 const connectDB = require('./DB/connection');
 const app = express()
-var cors = require('cors')
-const port = process.env.port
+const cors = require('cors')
+app.use(cors())
+const port = process.env.port || 5000
 const indexRouter = require("./modules/index.router")
 // var whitelist = ['http://example1.com', 'http://example2.com']
 // var corsOptions = {
@@ -15,9 +16,18 @@ const indexRouter = require("./modules/index.router")
 //     }
 //   }
 // }
-app.use(cors())
 app.use(express.json())
 const path = require('path')
+app.get("/", (req, res) => {
+    try {
+        res.json({ message: "Welcome page" })
+
+    } catch (error) {
+        res.json({ message: "error grt page" })
+
+    }
+
+})
 app.use('/api/v1/uploads', express.static(path.join(__dirname, './uploads')))
 app.use('/api/v1/auth', indexRouter.authRouter)
 app.use('/api/v1/user', indexRouter.userRouter)
@@ -35,11 +45,7 @@ app.get("/qr", (req, res) => {
     })
 })
 
-app.get("/", (req, res) => {
 
-    res.json({ message: "Welcome page" })
-
-})
 connectDB()
 app.listen(port, () => {
     console.log(`server is runnin on port :::: ${port}`);
